@@ -1,5 +1,7 @@
 package com.example.ari.api_rest.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.ari.api_rest.model.dao.clienteDao;
 import com.example.ari.api_rest.model.dto.clienteDto;
 import com.example.ari.api_rest.model.entity.cliente;
-import com.example.ari.api_rest.service.ICliente;
+import com.example.ari.api_rest.service.IClienteService;
 
 @Service
-public class clienteImpl implements ICliente {
+public class clienteImpl implements IClienteService {
 
     @Autowired
     private clienteDao ClienteDao;
@@ -40,4 +42,13 @@ public class clienteImpl implements ICliente {
         ClienteDao.delete(Cliente);
     }
 
+    @Override
+    public boolean existsById(Integer id) {
+        return ClienteDao.existsById(id);
+    }
+
+    @Override
+    public List<cliente> listAll() {
+        return (List) ClienteDao.findAll();
+    }
 }
